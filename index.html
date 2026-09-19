@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PYTHON, BUT DIFFERENT — Taught by Satyam Rana (SR)</title>
+  <meta name="description" content="An interactive, comic-style, story-driven learning experience created by Satyam Rana (SR) to master Python from absolute zero.">
+  
+  <!-- Google Fonts: Fraunces (Editorial Display), Plus Jakarta Sans (Clean Body), JetBrains Mono (Code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-banner" id="announcement-banner">
+    <span>✨ <em>Story Update:</em> Join <strong>Satyam Rana (SR)</strong> &amp; Riya in Chapter 00 to Chapter 03!</span>
+    <button class="banner-close" id="close-banner-btn" aria-label="Close banner">&times;</button>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <div class="header-container">
+      
+      <!-- Brand Logo -->
+      <div class="brand">
+        <a href="#" id="brand-link" class="logo-link">
+          <span class="logo-main">PYTHON</span>
+          <span class="logo-sub">BUT DIFFERENT</span>
+        </a>
+        <span class="brand-tag">Taught by Satyam Rana (SR)</span>
+      </div>
+
+      <!-- Navigation Worlds (Desktop & Tablet) -->
+      <nav class="world-nav" aria-label="Main Navigation">
+        <button class="nav-tab active" data-world="learn">
+          <span class="tab-num">01</span> Story
+        </button>
+        <button class="nav-tab" data-world="chapters">
+          <span class="tab-num">02</span> Chapters
+        </button>
+        <button class="nav-tab" data-world="think">
+          <span class="tab-num">03</span> Think
+        </button>
+        <button class="nav-tab" data-world="future">
+          <span class="tab-num">04</span> Future
+        </button>
+      </nav>
+
+      <!-- Right Header Actions -->
+      <div class="header-actions">
+        <button id="search-trigger-btn" class="search-btn" title="Search Idea Dictionary (⌘K)">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="search-label">Ideas</span>
+          <kbd class="kbd">⌘K</kbd>
+        </button>
+        
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">
+          <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="18" x2="20" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-drawer hidden">
+      <div class="mobile-drawer-inner">
+        <div class="mobile-drawer-title">Navigation Worlds</div>
+        <div class="mobile-nav-tabs">
+          <button class="mobile-nav-tab active" data-world="learn">01. Story Reader</button>
+          <button class="mobile-nav-tab" data-world="chapters">02. All Chapters</button>
+          <button class="mobile-nav-tab" data-world="think">03. How Programmers Think</button>
+          <button class="mobile-nav-tab" data-world="future">04. The Future of Coding</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Viewport -->
+  <main id="app-viewport">
+    
+    <!-- ==================== WORLD 1: LEARN (Story Reader) ==================== -->
+    <section id="world-learn" class="world-view active-view">
+      
+      <!-- Editorial Hero Banner -->
+      <div class="hero-section">
+        <div class="hero-badge">STORY-DRIVEN PYTHON &bull; BY SATYAM RANA (SR)</div>
+        <h1 class="hero-title">Learn to think like a programmer. <br><span class="serif-italic">Not through textbooks.</span></h1>
+        <p class="hero-subtitle">
+          Join <strong>Riya</strong>, <strong>Byte</strong>, and your teacher <strong>Satyam Rana (SR)</strong> on a story-driven journey from absolute zero to mastering code.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="hero-start-btn">Start Chapter 00: Absolute Zero →</button>
+          <button class="btn btn-secondary" id="hero-chapters-btn">Browse All Chapters</button>
+        </div>
+      </div>
+
+      <!-- Main Reader Layout -->
+      <div class="reader-layout">
+        
+        <!-- Sidebar -->
+        <aside class="chapter-sidebar" id="chapter-sidebar">
+          <div class="sidebar-header">
+            <h3>Chapter Index</h3>
+            <span class="sidebar-subtitle">Curriculum by Satyam Rana (SR)</span>
+          </div>
+          <ul class="chapter-list" id="sidebar-chapter-list">
+            <!-- Dynamic Sidebar List -->
+          </ul>
+        </aside>
+
+        <!-- Main Content Reading Area -->
+        <article class="chapter-content-container" id="chapter-article">
+          <!-- Chapter Content Injected via JS -->
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== WORLD 2: CHAPTERS (All Chapters Directory) ==================== -->
+    <section id="world-chapters" class="world-view hidden-view">
+      <div class="world-hero">
+        <span class="world-tag">FULL CURRICULUM</span>
+        <h2>The Chapter Universe</h2>
+        <p class="world-desc">Explore the entire story chapter by chapter. Designed and taught by Satyam Rana (SR).</p>
+        
+        <!-- Filter Controls -->
+        <div class="chapters-filter-bar">
+          <input type="text" id="chapters-search-input" placeholder="Search chapters by keyword (e.g. Variable, Operator, Typecasting)..." autocomplete="off">
+          <div class="category-pills" id="category-pills">
+            <button class="pill active" data-cat="all">All Topics</button>
+            <button class="pill" data-cat="basics">Basics</button>
+            <button class="pill" data-cat="logic">Logic &amp; Operators</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapters-directory-grid" id="chapters-directory-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ==================== WORLD 3: THINK ==================== -->
+    <section id="world-think" class="world-view hidden-view">
+      <div class="world-hero">
+        <span class="world-tag">PILLAR 03 — MENTAL MODELS</span>
+        <h2>How Programmers Think</h2>
+        <p class="world-desc">Satyam Rana's core principles of problem-solving, abstraction, and debugging.</p>
+      </div>
+      <div class="think-grid" id="think-cards-container">
+        <!-- Populated dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- ==================== WORLD 4: FUTURE ==================== -->
+    <section id="world-future" class="world-view hidden-view">
+      <div class="future-essay-container">
+        <div class="essay-header">
+          <span class="world-tag">PILLAR 04 — PHILOSOPHY</span>
+          <h1 class="essay-title">What Happens When Computers Write Code?</h1>
+          <div class="essay-meta">
+            <span>By Satyam Rana (SR)</span> &bull; <span>5 min read</span> &bull; <span>Forward Thinking</span>
+          </div>
+        </div>
+        <div class="essay-body">
+          <p class="lead-text">
+            In 1990, programmers wrote every byte by hand. In 2010, libraries did 80% of the heavy lifting. Today in 2026, AI generates entire modules in seconds.
+          </p>
+          <hr class="divider">
+          <h3>Does coding disappear?</h3>
+          <p>
+            No. But the definition of coding shifts from <em>syntax transcription</em> to <em>intent specification and architectural judgement</em>.
+          </p>
+          <p>
+            When syntax becomes effortless, understanding <strong>problems, data flow, edge cases, and human intent</strong> becomes the ultimate superpower.
+          </p>
+          <blockquote class="editorial-quote">
+            "The computer doesn't care how hard you worked on the code. It only cares whether the logic reflects reality." — Satyam Rana
+          </blockquote>
+          <h3>What remains uniquely human?</h3>
+          <ul>
+            <li><strong>Empathy</strong>: Designing for human feelings and workflow friction.</li>
+            <li><strong>Taste</strong>: Knowing what to omit and keeping solutions simple.</li>
+            <li><strong>Debugging Reality</strong>: Asking <em>"Is this even the right problem to solve?"</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== GLOBAL IDEA DICTIONARY DRAWER (⌘K) ==================== -->
+  <div id="idea-modal-backdrop" class="modal-backdrop hidden">
+    <div class="idea-modal">
+      <div class="modal-header">
+        <div class="modal-search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="dictionary-search-input" placeholder="Search concepts (e.g. Variable, Operator, Typecasting)..." autocomplete="off">
+          <span class="modal-esc-tag">ESC</span>
+        </div>
+      </div>
+      <div class="modal-body" id="dictionary-results-container">
+        <!-- Populated via JS -->
+      </div>
+      <div class="modal-footer">
+        <span>Tip: Click any highlighted word in any story chapter to inspect its plain-English mental model.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-title">PYTHON, BUT DIFFERENT</span>
+        <p>Created &amp; taught by Satyam Rana (SR) — A story-driven living learning world.</p>
+      </div>
+      <div class="footer-links">
+        <button class="footer-link-btn" id="footer-reset-btn">Reset Story Progress</button>
+        <button class="footer-link-btn" id="footer-shortcut-btn">Keyboard Shortcuts (⌘K)</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="dictionary.js" type="module"></script>
+  <script src="chapters.js" type="module"></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
