@@ -7,46 +7,83 @@ export const chaptersData = [
   {
     id: 0,
     number: "Chapter 00",
-    title: "Absolute Zero: What Is a Computer Anyway?",
-    subtitle: "Before writing code, Riya asks the question nobody dares to ask: How does a piece of glass and metal actually think?",
+    title: "Before We Learn Python",
+    subtitle: "Taking a step back before writing our first line of code.",
     readTime: "5 min read",
     category: "basics",
     story: `
       <p class="lead-text">
-        Riya sat at her desk staring at her laptop screen. The glass reflected her eyes. The keyboard felt cold under her fingers.
+        Hey.
       </p>
       <p>
-        She had heard people say <em>"computers are super smart."</em> But as she stared at the blank screen, a strange question hit her:
+        Before we write our first line of Python, let's take a step back.
       </p>
       <p>
-        <em>"How does a block of silicon, copper, and glass actually know what to do?"</em>
+        Look around you.
+      </p>
+      <p>
+        Your phone has apps. Your laptop has software. There are websites, games, operating systems, banking apps, social media, and now AI systems that can talk, see, create images, write code and do all kinds of things.
+      </p>
+      <p>
+        It can feel like there is a huge amount happening inside a computer. But underneath all of it, computers are surprisingly simple.
+      </p>
+      <p>
+        At the lowest level, computers work with <strong>bits</strong> — tiny pieces of information represented as <code>0</code> and <code>1</code>.
+      </p>
+      <p>
+        Something like:
+      </p>
+      <pre style="font-family: var(--font-mono); background: var(--bg-subtle); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border-color); font-size: 0.9rem; margin-bottom: 1.25rem;"><code>01001000 01100101 01101100 01101100 01101111</code></pre>
+      <p>
+        You <em>could</em> try to learn programming by talking directly in 0s and 1s.
+      </p>
+      <p>
+        But... please don't.
+      </p>
+      <p>
+        Humans are not very good at looking at <code>01001000 01100101 01101100 01101100 01101111</code> and thinking:
+      </p>
+      <blockquote class="editorial-quote" style="font-size: 1.25rem; margin: 1.5rem 0;">
+        "Ah yes. Let's build an app."
+      </blockquote>
+      <p>
+        We needed another layer. So humans created <strong>programming languages</strong>.
+      </p>
+      <p>
+        Programming languages give us a way to describe what we want a computer to do using words, symbols and rules that are much easier for humans to understand.
+      </p>
+      <p>
+        There are many programming languages: <strong>C, C++, Java, JavaScript, Rust, Go...</strong>
+      </p>
+      <p>
+        And the one we're going to spend a lot of time with: <strong>Python</strong>.
       </p>
     `,
     comicPanels: [
       {
+        speaker: "sr",
+        name: "Satyam Rana (SR)",
+        text: "Python lets us write print(\"Hello\") instead of trying to communicate directly with a machine using a sea of 0s and 1s. And that tiny line is where our journey begins."
+      },
+      {
         speaker: "riya",
         name: "Riya",
-        text: "Wait... is there a tiny brain inside this machine? How does it know how to display colors or play music?"
+        text: "Wait... so Python is like the human bridge between my thoughts and the computer's 0s and 1s?"
       },
       {
         speaker: "byte",
         name: "Byte",
-        text: "Zero brains! Computers are actually dumb. They are just billions of microscopic electrical switches called transistors. A switch is either ON (1) or OFF (0)."
-      },
-      {
-        speaker: "riya",
-        name: "Riya",
-        text: "So... if a computer only understands 0s and 1s, do I have to type 01001000 01100101 01101100 01101100 01101111 to say Hello?"
+        text: "Exactly! I take your Python print(\"Hello\") recipe and translate it into electrical pulses for CPU silicon in milliseconds."
       },
       {
         speaker: "sr",
         name: "Satyam Rana (SR)",
-        text: "Welcome to programming, Riya! In 1950, yes — people had to flip physical switches. But today we use Python. Python is our human translator that converts plain-English recipes into machine instructions!"
+        text: "But before we start writing Python, there's one more question: What actually happens between our code and the computer? That's where things get interesting."
       }
     ],
     explanation: `
       <p>
-        <strong>Programming</strong> is simply giving a computer a step-by-step recipe. 
+        <strong>Programming</strong> is giving a computer a step-by-step recipe. 
         Python reads your recipe line by line from top to bottom.
       </p>
       <p>
@@ -54,17 +91,17 @@ export const chaptersData = [
       </p>
     `,
     interactiveCode: {
-      initialCode: `# Your first conversation with the computer!\nprint("Hello World!")\nprint("I am Riya, learning Python with Satyam Rana.")`,
-      expectedOutput: `Hello World!\nI am Riya, learning Python with Satyam Rana.`,
+      initialCode: `# Your first step into programming with Satyam Rana (SR)\nprint("Hello World!")\nprint("I am communicating with a computer through Python.")`,
+      expectedOutput: `Hello World!\nI am communicating with a computer through Python.`,
       brokenCode: `print(Hello World!)`,
-      brokenExplanation: `<strong>SyntaxError / NameError: name 'Hello' is not defined</strong><br>Without quotation marks, Python thinks "Hello" is a variable label inside its memory! Quotes tell Python: <em>"This is raw text!"</em>`
+      brokenExplanation: `<strong>SyntaxError / NameError: name 'Hello' is not defined</strong><br>Without quotation marks, Python thinks "Hello" is a variable label inside memory! Quotes tell Python: <em>"This is raw text string!"</em>`
     },
     dontMemorize: {
-      title: "DON'T MEMORIZE: Binary math or 0s and 1s",
-      content: "As Satyam Rana (SR) says: You don't need to know how binary hardware works to write great code. Focus on the logic!"
+      title: "DON'T MEMORIZE: 0s and 1s binary translation",
+      content: "Satyam's Rule: You don't need to memorize binary code. Focus on expressing clear instructions!"
     },
     underHood: {
-      title: "UNDER THE HOOD: What happens when you press 'Run Code'?",
+      title: "UNDER THE HOOD: What happens between Python code and the CPU?",
       content: "Your text goes to the Python Interpreter, which compiles it into bytecode (.pyc), which CPU hardware executes as electrical pulses!"
     }
   },
