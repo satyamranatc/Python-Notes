@@ -28,6 +28,14 @@ const state = {
 // 1. Initializer & Event Listeners
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('ch')) {
+    const parsedId = parseInt(urlParams.get('ch'), 10);
+    if (!isNaN(parsedId)) {
+      state.currentChapterId = parsedId;
+    }
+  }
+
   initNavigation();
   initMobileDrawer();
   initDictionaryModal();
@@ -399,8 +407,12 @@ function renderChaptersDirectory() {
   container.querySelectorAll('.read-chapter-card-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const chId = parseInt(btn.dataset.id, 10);
-      switchWorld('learn');
-      renderChapter(chId);
+      if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/')) {
+        switchWorld('learn');
+        renderChapter(chId);
+      } else {
+        window.location.href = `index.html?ch=${chId}`;
+      }
     });
   });
 }

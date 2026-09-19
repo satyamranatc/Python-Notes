@@ -530,6 +530,7 @@
 @media (max-width: 900px) {
   .reader-layout {
     grid-template-columns: 1fr;
+    padding: 0 1rem 3rem 1rem;
   }
 
   .chapter-sidebar {
@@ -539,5 +540,28 @@
 
   .chapter-content-container {
     padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-section {
+    padding: 2.5rem 1rem 2rem 1rem;
+  }
+  .chapter-content-container {
+    padding: 1.25rem 1rem;
+  }
+  .comic-panel-container {
+    padding: 1rem;
+  }
+  .comic-dialogue {
+    gap: 0.75rem;
+  }
+  .avatar-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+  .playground-editor-area {
+    padding: 0.75rem;
   }
 }

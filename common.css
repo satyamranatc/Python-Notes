@@ -535,9 +535,27 @@ a {
   margin-bottom: 0.5rem;
 }
 
-/* Responsive Navbar adjustment */
+/* Responsive Navbar & Mobile Fine-Tuning */
 @media (max-width: 900px) {
   .site-nav { display: none; }
   .mobile-toggle { display: block; }
   .brand-tagline { display: none; }
+}
+
+@media (max-width: 600px) {
+  .header-container {
+    padding: 0 1rem;
+  }
+  .brand-text {
+    font-size: 1rem;
+  }
+  .search-trigger-btn span, .search-trigger-btn kbd {
+    display: none;
+  }
+  .search-trigger-btn {
+    padding: 0.4rem 0.6rem;
+  }
+  .chapter-signature-img {
+    max-width: 170px;
+  }
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>01. Story Reader — PYTHON, BUT DIFFERENT | By Satyam Sir</title>
+  <title>02. All Chapters — PYTHON, BUT DIFFERENT | By Satyam Sir</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,9 +12,9 @@
   
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="common.css">
-  <link rel="stylesheet" href="story.css">
+  <link rel="stylesheet" href="chapters.css">
 </head>
-<body data-page="story">
+<body data-page="chapters">
 
   <!-- Top Announcement Banner -->
   <div id="announcement-banner" class="top-banner">
@@ -29,7 +29,7 @@
     <div class="header-container">
       
       <!-- Brand Logo & Title -->
-      <a href="index.html" class="brand-link" id="brand-link">
+      <a href="index.html" class="brand-link">
         <span class="brand-logo-badge">SR</span>
         <span class="brand-text">PYTHON, BUT DIFFERENT</span>
         <span class="brand-tagline">BY SATYAM SIR</span>
@@ -38,8 +38,8 @@
       <!-- Desktop Navigation Tabs -->
       <nav class="site-nav">
         <div class="nav-tabs">
-          <a href="index.html" class="nav-tab active">01. Story</a>
-          <a href="chapters.html" class="nav-tab">02. Chapters</a>
+          <a href="index.html" class="nav-tab">01. Story</a>
+          <a href="chapters.html" class="nav-tab active">02. Chapters</a>
           <a href="cleancode.html" class="nav-tab">03. Clean Code Path</a>
           <a href="future.html" class="nav-tab">04. Future of Coding</a>
           <a href="resources.html" class="nav-tab">05. Resources</a>
@@ -59,8 +59,8 @@
     <!-- Mobile Drawer -->
     <div id="mobile-nav-drawer" class="mobile-drawer hidden">
       <div class="mobile-nav-tabs">
-        <a href="index.html" class="mobile-nav-tab active">01. Story Reader</a>
-        <a href="chapters.html" class="mobile-nav-tab">02. All Chapters</a>
+        <a href="index.html" class="mobile-nav-tab">01. Story Reader</a>
+        <a href="chapters.html" class="mobile-nav-tab active">02. All Chapters</a>
         <a href="cleancode.html" class="mobile-nav-tab">03. Clean Code Path</a>
         <a href="future.html" class="mobile-nav-tab">04. The Future of Coding</a>
         <a href="resources.html" class="mobile-nav-tab">05. Recommended Resources</a>
@@ -70,40 +70,25 @@
 
   <!-- Main Viewport -->
   <main id="app-viewport">
-    <section id="world-learn" class="world-view active-view">
-      
-      <!-- Editorial Hero Banner -->
-      <div class="hero-section">
-        <div class="hero-badge">STORY-DRIVEN PYTHON &bull; BY SATYAM SIR</div>
-        <h1 class="hero-title">Learn to think like a programmer. <br><span class="serif-italic">Not through textbooks.</span></h1>
-        <p class="hero-subtitle">
-          Join <strong>Riya</strong>, <strong>Byte</strong>, and your teacher <strong>Satyam Sir</strong> on a story-driven journey from absolute zero to mastering code.
-        </p>
-        <div class="hero-actions">
-          <button class="btn btn-primary" id="hero-start-btn">Start Chapter 00: Before We Learn Python →</button>
-          <a href="chapters.html" class="btn btn-secondary">Browse All Chapters</a>
+    <section id="world-chapters" class="world-view active-view">
+      <div class="world-hero">
+        <span class="world-tag">FULL CURRICULUM</span>
+        <h2>The Chapter Universe</h2>
+        <p class="world-desc">Explore the entire story chapter by chapter. Designed and taught by Satyam Sir.</p>
+        
+        <!-- Filter Controls -->
+        <div class="chapters-filter-bar">
+          <input type="text" id="chapters-search-input" placeholder="Search chapters by keyword (e.g. Variable, Operator, Typecasting)..." autocomplete="off">
+          <div class="category-pills" id="category-pills">
+            <button class="pill active" data-cat="all">All Topics</button>
+            <button class="pill" data-cat="basics">Basics</button>
+            <button class="pill" data-cat="logic">Logic &amp; Operators</button>
+          </div>
         </div>
       </div>
 
-      <!-- Main Reader Layout -->
-      <div class="reader-layout">
-        
-        <!-- Sidebar Chapter Index -->
-        <aside class="chapter-sidebar" id="chapter-sidebar">
-          <div class="sidebar-header">
-            <h3>Chapter Index</h3>
-            <span class="sidebar-subtitle">Curriculum by Satyam Sir</span>
-          </div>
-          <ul class="chapter-list" id="sidebar-chapter-list">
-            <!-- Dynamic Sidebar List -->
-          </ul>
-        </aside>
-
-        <!-- Main Content Reading Area -->
-        <article class="chapter-content-container" id="chapter-article">
-          <!-- Chapter Content Injected via JS -->
-        </article>
-
+      <div class="chapters-directory-grid" id="chapters-directory-grid">
+        <!-- Rendered dynamically via JS -->
       </div>
     </section>
   </main>
@@ -132,7 +117,7 @@
           <h4>Interactive Tools</h4>
           <ul>
             <li><a href="#" id="footer-shortcut-btn">Idea Dictionary (⌘K)</a></li>
-            <li><a href="#" id="footer-reset-btn">Restart Curriculum</a></li>
+            <li><a href="index.html">Start From Chapter 00</a></li>
           </ul>
         </div>
       </div>
@@ -148,7 +133,7 @@
     <div class="dictionary-card">
       <div class="dict-header">
         <span>🔍</span>
-        <input type="text" id="dictionary-search-input" placeholder="Search Python concepts &amp; metaphors (e.g. Variable, Operator, Typecasting)..." autocomplete="off">
+        <input type="text" id="dictionary-search-input" placeholder="Search Python concepts &amp; metaphors..." autocomplete="off">
       </div>
       <div class="dict-results" id="dictionary-results-container">
         <!-- Results populated via JS -->
