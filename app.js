@@ -5,6 +5,7 @@
 
 import { chaptersData } from './chapters.js';
 import { dictionaryData } from './dictionary.js';
+import { cleanCodePriorityTable, top20EssentialSyllabus, cleanCodeLevels } from './cleanCodeData.js';
 
 // Application State
 const state = {
@@ -14,6 +15,7 @@ const state = {
   chapterSearchQuery: '',
   dictionarySearchQuery: '',
   isCleanCodeStyle: true,
+  thinkActiveTab: 'top20',
   visualizerState: {
     varName: 'player_name',
     varVal: '"Riya"',
@@ -171,7 +173,6 @@ function renderChapter(chapterId) {
 
   const visualizerHtml = ch.visualizerType ? getVisualizerHtml(ch.visualizerType) : '';
 
-  // Predict First Multiple Choice Quiz
   const predictionHtml = ch.predictionQuestion ? `
     <div class="prediction-box">
       <div class="prediction-title">🔮 PREDICT BEFORE RUNNING: Test Your Intuition</div>
@@ -185,7 +186,6 @@ function renderChapter(chapterId) {
     </div>
   ` : '';
 
-  // Code Playground HTML
   const playgroundHtml = ch.interactiveCode ? `
     <div class="code-playground">
       <div class="playground-bar">
@@ -206,7 +206,6 @@ function renderChapter(chapterId) {
     </div>
   ` : '';
 
-  // Mini Challenge Prompt
   const challengeHtml = ch.challenge ? `
     <div class="challenge-box">
       <div class="challenge-title">🎯 MINI PRACTICE CHALLENGE</div>
@@ -230,6 +229,14 @@ function renderChapter(chapterId) {
       </div>
     </details>
   ` : '';
+
+  // Satyam Sir's Signature Block HTML at the end of each chapter
+  const signatureBlockHtml = `
+    <div class="chapter-signature-block">
+      <img src="signature.png" alt="Signature of Satyam Sir (S. Rana)" class="chapter-signature-img">
+      <span class="signature-caption">Curriculum &amp; Story Architect &bull; <strong>Satyam Sir (S. Rana)</strong></span>
+    </div>
+  `;
 
   article.innerHTML = `
     <div class="chapter-header">
@@ -259,13 +266,14 @@ function renderChapter(chapterId) {
 
     ${underHoodHtml}
 
-    <div style="display: flex; justify-content: space-between; margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
+    ${signatureBlockHtml}
+
+    <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
       ${chapterId > 0 ? `<button class="btn btn-secondary" id="ch-prev-btn">← Previous Chapter</button>` : '<div></div>'}
       ${chapterId < chaptersData.length - 1 ? `<button class="btn btn-primary" id="ch-next-btn">Next Chapter →</button>` : '<div></div>'}
     </div>
   `;
 
-  // Attach Prediction Quiz Events
   if (ch.predictionQuestion) {
     const predBtns = article.querySelectorAll('.pred-opt-btn');
     const predFeedback = document.getElementById('pred-feedback');
@@ -289,7 +297,6 @@ function renderChapter(chapterId) {
     });
   }
 
-  // Attach Code Execution Events
   if (ch.interactiveCode) {
     const runBtn = document.getElementById('pg-run-btn');
     const breakBtn = document.getElementById('pg-break-btn');
@@ -698,38 +705,127 @@ function bindBannerEvents() {
 // ==========================================================================
 function renderThinkWorld() {
   renderCleanCodeShowcase();
+  bindThinkPills();
+  renderThinkContent();
+}
 
+function bindThinkPills() {
+  const pills = document.querySelectorAll('#level-pills .pill');
+  pills.forEach(pill => {
+    if (!pill.dataset.bound) {
+      pill.dataset.bound = 'true';
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        state.thinkActiveTab = pill.dataset.level;
+        renderThinkContent();
+      });
+    }
+  });
+}
+
+function renderThinkContent() {
   const container = document.getElementById('think-cards-container');
   if (!container) return;
 
-  const thinkTopics = [
-    {
-      num: "01. MENTAL MODEL",
-      title: "Problem Decomposition",
-      desc: "Satyam Sir's First Rule: Never try to code an entire system at once. Break big intimidating problems into 3 tiny child problems until each fits on a single napkin."
-    },
-    {
-      num: "02. MENTAL MODEL",
-      title: "The Debugging Mindset",
-      desc: "Python isn't angry at you when an error pops up. Treat errors like clues at a crime scene. Ask: 'What assumption did I make that turned out to be false?'"
-    },
-    {
-      num: "03. MENTAL MODEL",
-      title: "Typecasting & Data Contracts",
-      desc: "Data doesn't mix by magic. Always make sure your functions and operations receive the exact data type they expect."
-    },
-    {
-      num: "04. MENTAL MODEL",
-      title: "Clean Code Aesthetics",
-      desc: "Code is read 10x more often than it is written. Write your code for human beings first, and for the Python interpreter second."
-    }
-  ];
+  const tab = state.thinkActiveTab;
 
-  container.innerHTML = thinkTopics.map(t => `
-    <div class="think-card">
-      <span class="card-num">${t.num}</span>
-      <h3>${t.title}</h3>
-      <p style="color: var(--text-secondary); font-size: 0.95rem;">${t.desc}</p>
+  if (tab === 'top20') {
+    container.innerHTML = `
+      <div style="grid-column: 1/-1; margin-bottom: 1rem;">
+        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.25rem;">
+          The Top 20 Essential Python Clean Code Syllabus
+        </h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          If you only have time for a short mandatory syllabus, Satyam Sir recommends mastering these 20 core concepts first:
+        </p>
+      </div>
+      ${top20EssentialSyllabus.map(item => `
+        <div class="think-card" style="border-left: 4px solid var(--accent-blue);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span class="card-num" style="color: var(--accent-blue);">ESSENTIAL #${item.rank}</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; background: var(--accent-blue-light); color: var(--accent-blue); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">MANDATORY</span>
+          </div>
+          <h3 style="font-size: 1.15rem; margin: 0.4rem 0;">${item.title}</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0;">${item.desc}</p>
+        </div>
+      `).join('')}
+    `;
+    return;
+  }
+
+  if (tab === 'table') {
+    container.innerHTML = `
+      <div style="grid-column: 1/-1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; overflow-x: auto;">
+        <div style="margin-bottom: 1rem;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.4rem;">Satyam Sir's 40-Topic Master Priority Matrix</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Clean Code concepts mapped for new Python programmers with priority weighting.</p>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left;">
+          <thead>
+            <tr style="background: var(--bg-subtle); border-bottom: 2px solid var(--border-color);">
+              <th style="padding: 0.75rem 0.5rem; width: 45px;">#</th>
+              <th style="padding: 0.75rem 0.5rem;">Chapter / Concept</th>
+              <th style="padding: 0.75rem 0.5rem;">New Programmer Priority?</th>
+              <th style="padding: 0.75rem 0.5rem; width: 140px;">Priority Stars</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${cleanCodePriorityTable.map(row => `
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 0.6rem 0.5rem; font-weight: bold; color: var(--text-muted);">${row.id}</td>
+                <td style="padding: 0.6rem 0.5rem; font-weight: 600;">${row.topic}</td>
+                <td style="padding: 0.6rem 0.5rem;">
+                  <span style="display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; background: ${row.learn.includes('Very') ? '#FEF3C7' : row.learn === 'Yes' ? '#DCFCE7' : '#F3F4F6'}; color: ${row.learn.includes('Very') ? '#92400E' : row.learn === 'Yes' ? '#166534' : '#374151'};">
+                    ${row.learn}
+                  </span>
+                </td>
+                <td style="padding: 0.6rem 0.5rem; letter-spacing: 2px;">${row.stars}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+    return;
+  }
+
+  // Handle Level Filters (l1 to l12)
+  const selectedLevel = cleanCodeLevels.find(lvl => lvl.id === tab);
+  const levelsToRender = selectedLevel ? [selectedLevel] : cleanCodeLevels;
+
+  container.innerHTML = levelsToRender.map(lvl => `
+    <div style="grid-column: 1/-1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.75rem; margin-bottom: 1rem; transition: transform 0.2s;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+        <span class="card-num" style="color: var(--accent-terracotta);">LEVEL ${lvl.level}</span>
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-terracotta); background: #FFEDD5; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 700;">
+          STEP-BY-STEP PROGRESSION
+        </span>
+      </div>
+      <h3 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--text-primary); margin-bottom: 0.25rem;">${lvl.title}</h3>
+      <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.25rem;">${lvl.subtitle}</p>
+
+      <div style="margin-bottom: 1.25rem; background: var(--bg-subtle); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+        <strong style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">Key Topics Taught:</strong>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+          ${lvl.topics.map(t => `<span style="font-size: 0.82rem; background: var(--bg-card); padding: 0.25rem 0.5rem; border-radius: 4px; border: 1px solid var(--border-color);">${t}</span>`).join('')}
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+        <div style="background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 8px; padding: 1rem;">
+          <div style="color: #991B1B; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem;">❌ BAD CODE EXAMPLE</div>
+          <pre style="font-family: var(--font-mono); font-size: 0.82rem; background: #FFFFFF; padding: 0.75rem; border-radius: 6px; overflow-x: auto;"><code>${lvl.badCode}</code></pre>
+        </div>
+        <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 8px; padding: 1rem;">
+          <div style="color: #065F46; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem;">✅ CLEAN PYTHON CODE</div>
+          <pre style="font-family: var(--font-mono); font-size: 0.82rem; background: #FFFFFF; padding: 0.75rem; border-radius: 6px; overflow-x: auto;"><code>${lvl.cleanCode}</code></pre>
+        </div>
+      </div>
+
+      <div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 0.85rem 1rem; border-radius: 6px; color: #1E40AF; font-size: 0.9rem;">
+        💡 <strong>Satyam Sir's Insight:</strong> ${lvl.explanation}
+      </div>
     </div>
   `).join('');
 }
@@ -739,19 +835,39 @@ function renderCleanCodeShowcase() {
   const btn = document.getElementById('toggle-clean-code-btn');
   if (!box) return;
 
-  const cleanSnippet = `# Satyam Sir's Standard: Clean, expressive Python
-base_coins = 50
-multiplier = 3
+  const cleanSnippet = `# Satyam Sir's Standard: Single Responsibility Principle (SRP)
+def validate_student(student: Student) -> bool:
+    """Validate student input data."""
+    return bool(student.name and student.age >= 18)
 
-total_coins = base_coins * multiplier
-print(f"Total coins collected: {total_coins}")`;
+def calculate_marks(student: Student) -> float:
+    """Calculate aggregate grade marks."""
+    return sum(student.scores) / len(student.scores)
 
-  const messySnippet = `# Messy, hard-to-read code (Avoid!)
-c=50;m=3
-tc=c*m
-print("Coins:",tc)`;
+def save_student(student: Student) -> None:
+    """Save clean record to database."""
+    database.save(student)
 
-  box.innerHTML = `<pre><code>${state.isCleanCodeStyle ? cleanSnippet : messySnippet}</code></pre>`;
+def send_welcome_email(student: Student) -> None:
+    """Send confirmation email."""
+    mailer.send(student.email, "Welcome!")`;
+
+  const messySnippet = `# Messy Anti-Pattern: One Giant God Function doing 5 unrelated jobs
+def process_student(name, age, city, course, phone, email, scores):
+    # 1. Read & validate student
+    if not name or age < 18:
+        return False
+    # 2. Calculate marks
+    total = 0
+    for s in scores:
+        total += s
+    avg = total / len(scores)
+    # 3. Save student
+    db_conn.execute("INSERT INTO students VALUES (?, ?)", (name, avg))
+    # 4. Send email
+    smtp.sendmail("admin@school.com", email, "Welcome!")`;
+
+  box.innerHTML = `<pre style="font-family: var(--font-mono); font-size: 0.88rem; padding: 1rem; background: var(--bg-subtle); border-radius: 8px;"><code>${state.isCleanCodeStyle ? cleanSnippet : messySnippet}</code></pre>`;
 
   if (btn && !btn.dataset.bound) {
     btn.dataset.bound = 'true';

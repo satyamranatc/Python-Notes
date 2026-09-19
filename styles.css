@@ -474,6 +474,36 @@ a {
   margin-bottom: 0.35rem;
 }
 
+/* Satyam Sir's Chapter End Signature Styling */
+.chapter-signature-block {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.chapter-signature-img {
+  height: 68px;
+  width: auto;
+  object-fit: contain;
+  filter: contrast(1.15);
+  margin-bottom: 0.3rem;
+  transition: transform 0.2s ease;
+}
+
+.chapter-signature-img:hover {
+  transform: scale(1.03) rotate(-1deg);
+}
+
+.signature-caption {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
 /* Reader Layout */
 .reader-layout {
   max-width: var(--max-width);
@@ -1237,4 +1267,5 @@ a {
   .chapters-directory-grid { grid-template-columns: 1fr; }
   .essay-title { font-size: 2.1rem; }
   .editorial-quote { font-size: 1.3rem; padding-left: 1rem; }
+  .chapter-signature-img { height: 52px; }
 }

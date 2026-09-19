@@ -1,7 +1,7 @@
 /* ==========================================================================
    PYTHON, BUT DIFFERENT — Curriculum & Story Data
    Curriculum Architect & Lead Teacher: Satyam Sir
-   Pedagogy: Curiosity -> Prediction -> Surprising Experiment -> Mental Model -> Challenge
+   Reference: Python For Beginners - 1 & Python Crash Course
    ========================================================================== */
 
 export const chaptersData = [
@@ -48,7 +48,7 @@ export const chaptersData = [
       {
         speaker: "sr",
         name: "Satyam Sir",
-        text: "Python gives us a human-friendly way to write instructions using clear words and symbols. Python lets us write print(\"Hello\") instead of typing a sea of 0s and 1s!"
+        text: "Python gives us a human-friendly way to write instructions using clear words and symbols. Python lets us write print(\"Hello, World!\") instead of typing a sea of 0s and 1s!"
       },
       {
         speaker: "riya",
@@ -64,22 +64,22 @@ export const chaptersData = [
     explanation: `
       <h3>The True Mental Model of Execution</h3>
       <div style="background: var(--bg-paper); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; font-family: var(--font-mono); font-size: 0.9rem; text-align: center; line-height: 1.8;">
-        Your Idea ➔ Python Source Code ➔ Python Interpreter / Runtime ➔ Operating System &amp; CPU ➔ Output Result
+        Your Idea ➔ Python Source Code ➔ Python Interpreter ➔ Operating System &amp; CPU ➔ Output Result
       </div>
       <p style="margin-top: 1rem;">
         An <strong>algorithm</strong> is simply a precise step-by-step recipe to solve a problem. Python executes that recipe from top to bottom, line by line.
       </p>
     `,
     interactiveCode: {
-      initialCode: `# Your first Python instruction!\nprint("Hello World!")\nprint("I am instructing a computer through Python.")`,
-      expectedOutput: `Hello World!\nI am instructing a computer through Python.`,
-      brokenCode: `print(Hello World!)`,
-      brokenExplanation: `<strong>SyntaxError / NameError</strong>: Without quotation marks, Python thinks "Hello" is a variable name in memory! Quotes tell Python: <em>"This is raw text!"</em>`
+      initialCode: `# 1. Printing Output\nprint("Hello, World!")\nprint("Welcome to Python For Beginners with Satyam Sir!")`,
+      expectedOutput: `Hello, World!\nWelcome to Python For Beginners with Satyam Sir!`,
+      brokenCode: `print(Hello, World!)`,
+      brokenExplanation: `<strong>SyntaxError / NameError</strong>: Without quotation marks, Python thinks "Hello" is a variable name in memory! Quotes tell Python: <em>"This is raw text string!"</em>`
     },
     predictionQuestion: {
-      question: "What will happen if you remove both quotes around \"Hello World!\" in print()?",
+      question: "What will happen if you remove both quotes around \"Hello, World!\" in print()?",
       options: [
-        "It will print Hello World! normally",
+        "It will print Hello, World! normally",
         "Python will throw a SyntaxError / NameError because it looks for a variable",
         "The computer will turn off"
       ],
@@ -87,7 +87,7 @@ export const chaptersData = [
       explanation: "Without quotation marks, Python thinks you are referring to a variable name in memory drawer!"
     },
     challenge: {
-      prompt: "Write a line of Python code using print() that displays your own name on the screen.",
+      prompt: "Write a line of Python code using print() that displays 'Hello, World!'.",
       targetKeyword: "print"
     },
     dontMemorize: {
@@ -97,99 +97,92 @@ export const chaptersData = [
   },
 
   // --------------------------------------------------------------------------
-  // CHAPTER 01: How Does Python Remember? (Target Depth: 8/10)
+  // CHAPTER 01: Variables, Types & Naming Rules (Target Depth: 8/10)
   // --------------------------------------------------------------------------
   {
     id: 1,
     number: "Chapter 01",
-    title: "How Does Python Remember? (Variables & Memory)",
-    subtitle: "Understanding names, values, assignment, dynamic typing, and memory reassignment.",
+    title: "Variables, Data Types & Naming Conventions",
+    subtitle: "Creating valid variables, snake_case, constants, and RAM object allocation.",
     readTime: "10 min read",
     category: "basics",
     depthTag: "Concept Depth: 8/10 (Core Foundation)",
     story: `
       <p class="lead-text">
-        Riya made the computer say "Hello". But a second later, the data vanished.
+        Riya created her first variable. But when she tried to name a variable <code>1user</code>, Python refused to run her code!
       </p>
       <p>
-        "I need the computer to remember the player's name and score," Riya said. "Where does Python store things?"
+        "Why is Python rejecting my variable name?" Riya asked.
       </p>
     `,
     comicPanels: [
       {
         speaker: "riya",
         name: "Riya",
-        text: "Why doesn't Python remember my player's name after printing it?"
-      },
-      {
-        speaker: "byte",
-        name: "Byte",
-        text: "Because you didn't give Python a labeled box in RAM to hold onto it!"
+        text: "Satyam Sir, why did Python accept user1 = 'Bob' but reject 1user = 'Charlie'?"
       },
       {
         speaker: "sr",
         name: "Satyam Sir",
-        text: "Important mental model: A variable in Python is NOT a box that holds the number. A variable is a NAME (sticky label) that points to an OBJECT value living in RAM!"
+        text: "Because Python has strict Variable Naming Rules! Variable names MUST start with a letter or an underscore (_), NEVER a number!"
+      },
+      {
+        speaker: "byte",
+        name: "Byte",
+        text: "Also, Python is Case-Sensitive! age and Age are two completely different variable drawers in memory!"
       }
     ],
     explanation: `
-      <h3>What does <code>=</code> actually mean?</h3>
-      <p>
-        In mathematics, <code>=</code> means "both sides are equal". But in programming, <code>=</code> is the <strong>Assignment Operator</strong>!
-      </p>
-      <p>
-        It tells Python: <em>"Evaluate the value on the right, create that value object in memory, and stick the name on the left onto it!"</em>
-      </p>
-
-      <h3>Crucial Mental Model: Reassignment &amp; Dynamic Typing</h3>
-      <p>
-        Consider this code:
-      </p>
-      <pre style="font-family: var(--font-mono); background: var(--bg-subtle); padding: 0.75rem 1rem; border-radius: 8px;"><code>age = 20\nage = 21</code></pre>
-      <p>
-        Did Python "change the number 20 into 21"? <strong>No!</strong> The integer object <code>20</code> still exists in memory. Python simply moved the label <code>age</code> to point to a new integer object <code>21</code>!
-      </p>
-
-      <h3>The 4 Core Data Types &amp; <code>type()</code></h3>
+      <h3>1. Data Types Overview</h3>
       <ul>
-        <li><code>str</code> (String): Text inside quotes, e.g. <code>"Riya"</code></li>
-        <li><code>int</code> (Integer): Whole numbers, e.g. <code>20</code></li>
-        <li><code>float</code> (Float): Numbers with decimals, e.g. <code>9.5</code></li>
-        <li><code>bool</code> (Boolean): <code>True</code> or <code>False</code></li>
+        <li><code>message = "Hello, World!"</code> ➔ <strong>String (str)</strong></li>
+        <li><code>number = 10</code> ➔ <strong>Integer (int)</strong></li>
+        <li><code>pi = 3.14</code> ➔ <strong>Float (float)</strong></li>
       </ul>
-      <p>
-        You can inspect any variable's data type using the built-in <span class="term-link" data-id="function">type()</span> function!
-      </p>
 
-      <h3>Variable Naming Rules (snake_case)</h3>
-      <p>
-        Names can contain letters, numbers, and underscores <code>_</code>. They cannot start with a number or contain spaces. Python convention uses <code>snake_case</code> (e.g. <code>player_score</code>).
-      </p>
+      <h3>2. Valid vs. Invalid Variable Names</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+        <div style="background: #ECFDF5; border: 1px solid #A7F3D0; padding: 1rem; border-radius: 8px;">
+          <strong style="color: #065F46;">✅ Valid Examples:</strong>
+          <pre style="font-family: var(--font-mono); font-size: 0.85rem; margin-top: 0.5rem;"><code>name = "Alice"\n_age = 25\nuser1 = "Bob"\nuser_age = 30</code></pre>
+        </div>
+        <div style="background: #FEF2F2; border: 1px solid #FCA5A5; padding: 1rem; border-radius: 8px;">
+          <strong style="color: #991B1B;">❌ Invalid Examples:</strong>
+          <pre style="font-family: var(--font-mono); font-size: 0.85rem; margin-top: 0.5rem;"><code>1user = "Charlie"  # Starts with number\nuser-name = "Dave" # Contains hyphen</code></pre>
+        </div>
+      </div>
+
+      <h3>3. Naming Conventions (Satyam Sir's Standard)</h3>
+      <ul>
+        <li><strong>Meaningful Names</strong>: Use <code>user_age</code> instead of vague shortcuts like <code>ua</code>.</li>
+        <li><strong>snake_case</strong>: Join multiple words with underscores (e.g. <code>user_score</code>).</li>
+        <li><strong>Constants (ALL_CAPS)</strong>: Fixed constant values use UPPERCASE (e.g. <code>MAX_CONNECTIONS = 5</code>).</li>
+      </ul>
     `,
     visualizerType: "variable-inspector",
     interactiveCode: {
-      initialCode: `# Variable Creation & Reassignment\nage = 20\nprint("Initial Age:", age)\nprint("Data type of age:", type(age))\n\n# Reassignment (Label moves to new value!)\nage = 21\nprint("Reassigned Age:", age)\n\nname = "Riya"\nprint("Data type of name:", type(name))`,
-      expectedOutput: `Initial Age: 20\nData type of age: <class 'int'>\nReassigned Age: 21\nData type of name: <class 'str'>`,
-      brokenCode: `player_name = "Riya"\nprint(player_nam)`,
-      brokenExplanation: `<strong>NameError: name 'player_nam' is not defined</strong><br>Python searched memory labels for 'player_nam' and found nothing! Check your spelling.`
+      initialCode: `# Valid Variable Declarations\nmessage = "Hello, World!"  # String\nnumber = 10                # Integer\npi = 3.14                  # Float\n\n# Naming Conventions\nuser_age = 30              # snake_case\nMAX_CONNECTIONS = 5        # ALL_CAPS Constant\n\nprint(message)\nprint("User Age:", user_age)\nprint("Max Connections:", MAX_CONNECTIONS)`,
+      expectedOutput: `Hello, World!\nUser Age: 30\nMax Connections: 5`,
+      brokenCode: `1user = "Charlie"`,
+      brokenExplanation: `<strong>SyntaxError: invalid syntax</strong><br>Variable names cannot start with a number! Rename <code>1user</code> to <code>user1</code> or <code>_1user</code>.`
     },
     predictionQuestion: {
-      question: "If we execute: x = 10; x = 'Hello', what will type(x) return?",
+      question: "Which of the following is a valid Python variable name?",
       options: [
-        "It will throw an error because you can't change a variable's type",
-        "<class 'str'> because Python is dynamically typed",
-        "<class 'int'>"
+        "2nd_place",
+        "user-email",
+        "_user_age"
       ],
-      correctIndex: 1,
-      explanation: "Python features Dynamic Typing! A variable name can be reassigned from an integer to a string seamlessly."
+      correctIndex: 2,
+      explanation: "Variable names can start with letters or an underscore (_), but NEVER numbers or hyphens (-)."
     },
     challenge: {
-      prompt: "Create a variable named user_score with value 100, then print both user_score and type(user_score).",
-      targetKeyword: "user_score"
+      prompt: "Create a valid snake_case variable named user_age with value 25 and print it.",
+      targetKeyword: "user_age"
     },
     dontMemorize: {
-      title: "DON'T MEMORIZE: Variable containers as rigid boxes",
-      content: "Satyam Sir's Golden Rule: Remember that variable names are just sticky note labels pointing to objects in RAM memory!"
+      title: "DON'T MEMORIZE: Overly cryptic variable names",
+      content: "Satyam Sir's Rule: Code is read 10x more often than written! Use meaningful snake_case names."
     }
   },
 
@@ -277,228 +270,160 @@ export const chaptersData = [
   },
 
   // --------------------------------------------------------------------------
-  // CHAPTER 03: Operators (Target Depth: 8/10)
+  // CHAPTER 03: Operators Basics (Target Depth: 8/10)
   // --------------------------------------------------------------------------
   {
     id: 3,
     number: "Chapter 03",
-    title: "Operators & Logic (Arithmetic, Comparison, Logical, Assignment)",
-    subtitle: "Mastering Python's decision engines and the critical distinction between = and ==.",
+    title: "Operators Basics (Arithmetic, Comparison, Logical)",
+    subtitle: "Complete operator reference and the crucial distinction between = and ==.",
     readTime: "9 min read",
     category: "logic",
-    depthTag: "Concept Depth: 8/10 (Core Logic Foundation)",
+    depthTag: "Concept Depth: 8/10 (Operators Foundation)",
     story: `
       <p class="lead-text">
-        Now that Riya mastered variables and formatting print output, she wanted her game to calculate damage, check coin balances, and decide if the player won.
+        Now that Riya mastered storing variables, she wanted her game to calculate health points, damage multipliers, and evaluate win conditions.
       </p>
     `,
     comicPanels: [
       {
         speaker: "riya",
         name: "Riya",
-        text: "Can Python do math and compare scores for me?"
-      },
-      {
-        speaker: "byte",
-        name: "Byte",
-        text: "Python is a supercalculator! Use + - * / for math, and > < == != for decisions!"
+        text: "Satyam Sir, how do I calculate floor division or exponentiation in Python?"
       },
       {
         speaker: "sr",
         name: "Satyam Sir",
-        text: "Pay extreme attention to the difference between single = and double ==! Single = saves a value into a variable label. Double == asks Python a question: 'Are these two things equal?'"
+        text: "Use ** for exponentiation (powers) and // for floor division (integer division without decimals)! And use % for modulus (remainder)."
+      },
+      {
+        speaker: "byte",
+        name: "Byte",
+        text: "Here is your quick operator cheat sheet!"
       }
     ],
     explanation: `
-      <h3>1. Arithmetic Operators</h3>
-      <p><code>+</code> (Add), <code>-</code> (Subtract), <code>*</code> (Multiply), <code>/</code> (Float Divide), <code>//</code> (Floor Divide), <code>%</code> (Modulo / Remainder), <code>**</code> (Power / Exponent).</p>
+      <h3>1. Arithmetic Operators (x = 5, y = 2)</h3>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: var(--font-mono); font-size: 0.88rem;">
+        <thead>
+          <tr style="background: var(--bg-subtle); border-bottom: 2px solid var(--border-color);">
+            <th style="padding: 0.5rem; text-align: left;">Operation</th>
+            <th style="padding: 0.5rem; text-align: left;">Syntax</th>
+            <th style="padding: 0.5rem; text-align: left;">Result (x=5, y=2)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding: 0.4rem;">Addition</td><td>x + y</td><td>7</td></tr>
+          <tr><td style="padding: 0.4rem;">Subtraction</td><td>x - y</td><td>3</td></tr>
+          <tr><td style="padding: 0.4rem;">Multiplication</td><td>x * y</td><td>10</td></tr>
+          <tr><td style="padding: 0.4rem;">Division</td><td>x / y</td><td>2.5</td></tr>
+          <tr><td style="padding: 0.4rem;">Modulus (Remainder)</td><td>x % y</td><td>1</td></tr>
+          <tr><td style="padding: 0.4rem;">Exponentiation</td><td>x ** y</td><td>25</td></tr>
+          <tr><td style="padding: 0.4rem;">Floor Division</td><td>x // y</td><td>2</td></tr>
+        </tbody>
+      </table>
 
-      <h3>2. Comparison Operators (Return <code>True</code> or <code>False</code>)</h3>
-      <p><code>==</code> (Equal to), <code>!=</code> (Not equal to), <code>&gt;</code> (Greater than), <code>&lt;</code> (Less than), <code>&gt;=</code> (Greater or equal), <code>&lt;=</code> (Less or equal).</p>
+      <h3>2. Comparison Operators (a = 10, b = 20)</h3>
+      <ul>
+        <li><code>a == b</code> ➔ <strong>Equal to</strong>: <code>False</code> (Single <code>=</code> assigns; double <code>==</code> compares!)</li>
+        <li><code>a != b</code> ➔ <strong>Not equal to</strong>: <code>True</code></li>
+        <li><code>a &gt; b</code> ➔ <strong>Greater than</strong>: <code>False</code></li>
+        <li><code>a &lt; b</code> ➔ <strong>Less than</strong>: <code>True</code></li>
+        <li><code>a &gt;= b</code> ➔ <strong>Greater than or equal to</strong>: <code>False</code></li>
+        <li><code>a &lt;= b</code> ➔ <strong>Less than or equal to</strong>: <code>True</code></li>
+      </ul>
 
-      <h3>3. Logical Operators</h3>
-      <p><code>and</code> (True if BOTH are true), <code>or</code> (True if AT LEAST ONE is true), <code>not</code> (Flips True to False).</p>
-
-      <h3>4. Augmented Assignment Operators</h3>
-      <p><code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code> (Shortcut to update a variable, e.g. <code>score += 10</code> is short for <code>score = score + 10</code>).</p>
+      <h3>3. Logical Operators (a = True, b = False)</h3>
+      <ul>
+        <li><code>a and b</code> ➔ <strong>Logical AND</strong>: <code>False</code> (BOTH must be True)</li>
+        <li><code>a or b</code> ➔ <strong>Logical OR</strong>: <code>True</code> (AT LEAST ONE is True)</li>
+        <li><code>not a</code> ➔ <strong>Logical NOT</strong>: <code>False</code> (Flips boolean)</li>
+      </ul>
     `,
     interactiveCode: {
-      initialCode: `coins = 50\ncoins += 25  # Shortcut for coins = coins + 25\nprint(f"Total Coins: {coins}")\n\n# Comparison asking a question:\nis_rich = coins >= 70\nprint("Is player rich?", is_rich)\n\n# Logical Operators:\nhas_key = True\nhas_energy = True\ncan_open_door = has_key and has_energy\nprint("Can open door?", can_open_door)`,
-      expectedOutput: `Total Coins: 75\nIs player rich? True\nCan open door? True`
+      initialCode: `# Arithmetic Operators\nx = 5\ny = 2\nprint("Addition:", x + y)\nprint("Floor Division:", x // y)\nprint("Modulus:", x % y)\nprint("Exponentiation:", x ** y)\n\n# Comparison Operators\na = 10\nb = 20\nprint("a == b:", a == b)\nprint("a != b:", a != b)\n\n# Logical Operators\nprint("a > 5 and b > 15:", a > 5 and b > 15)`,
+      expectedOutput: `Addition: 7\nFloor Division: 2\nModulus: 1\nExponentiation: 25\na == b: False\na != b: True\na > 5 and b > 15: True`
     },
     predictionQuestion: {
-      question: "What is the output of 10 % 3?",
+      question: "What will 5 ** 2 output in Python?",
       options: [
-        "3.33",
-        "1 (the remainder after division)",
-        "3"
+        "10",
+        "25 (5 raised to the power of 2)",
+        "2.5"
       ],
       correctIndex: 1,
-      explanation: "Modulo % gives the remainder after integer division! 3 goes into 10 three times (9) leaving 1 remainder."
+      explanation: "** is the Exponentiation operator! 5 ** 2 means 5 * 5 = 25."
     },
     challenge: {
-      prompt: "Create a variable score = 50, use score += 20, then print whether score > 60.",
-      targetKeyword: "+="
+      prompt: "Write code calculating 7 // 2 (Floor Division) and print the result.",
+      targetKeyword: "//"
     },
     dontMemorize: {
       title: "DON'T MEMORIZE: Operator precedence tables",
-      content: "Satyam Sir's Rule: When in doubt, use parentheses <code>(a + b) * c</code> to make your intent 100% clear!"
+      content: "Satyam Sir's Rule: Use parentheses (a + b) * c whenever you want to be 100% clear!"
     }
   },
 
   // --------------------------------------------------------------------------
-  // CHAPTER 04: Types, Input & Typecasting (Target Depth: 7/10)
+  // CHAPTER 04: Flow Control (if, if-else) (Target Depth: 7/10)
   // --------------------------------------------------------------------------
   {
     id: 4,
     number: "Chapter 04",
-    title: "Typecasting: Mixing Incompatible Universes",
-    subtitle: "Why adding '20' + 5 causes a crash, and why type conversion isn't magical.",
+    title: "Flow Control (if & if-else Statements)",
+    subtitle: "Executing code based on conditions and decision branches.",
     readTime: "8 min read",
     category: "logic",
-    depthTag: "Concept Depth: 7/10 (Input & Type Mastery)",
+    depthTag: "Concept Depth: 7/10 (Flow Control Mastery)",
     story: `
       <p class="lead-text">
-        Riya wanted to ask the player for their age using <code>input()</code> and calculate how old they will be in 5 years.
-      </p>
-      <p>
-        She wrote: <code>age = input("Enter your age: ")</code>. The user typed <code>20</code>. Then Riya tried to do <code>age + 5</code>.
-      </p>
-      <p>
-        Suddenly, a scary red message exploded on her screen!
+        Riya was building a user registration check. If a user is 18 or older, they are an adult. Otherwise, they are a minor.
       </p>
     `,
     comicPanels: [
       {
         speaker: "riya",
         name: "Riya",
-        text: "AAAH! Python broke! It says: TypeError: can only concatenate str (not 'int') to str!"
-      },
-      {
-        speaker: "byte",
-        name: "Byte",
-        text: "Python didn't break! Python is protecting you. input() ALWAYS returns a string (text), even if the user typed numbers!"
+        text: "How do I make Python branch into different execution paths depending on user age?"
       },
       {
         speaker: "sr",
         name: "Satyam Sir",
-        text: "You can't add text '20' + 5. You must convert text '20' into integer 20 using int(). That process is called Typecasting!"
+        text: "Use Flow Control statements! The if statement checks a boolean condition. If true, it runs the indented code. The else statement handles everything else!"
       }
     ],
     explanation: `
-      <h3>Conversion Functions</h3>
-      <ul>
-        <li><code>int("20")</code> ➔ Converts string text <code>"20"</code> into integer <code>20</code></li>
-        <li><code>float("9.5")</code> ➔ Converts string text into decimal <code>9.5</code></li>
-        <li><code>str(100)</code> ➔ Converts integer <code>100</code> into string <code>"100"</code></li>
-        <li><code>bool(1)</code> ➔ Converts <code>1</code> to <code>True</code>, and <code>bool(0)</code> to <code>False</code></li>
-      </ul>
+      <h3>1. Simple <code>if</code> Statement</h3>
+      <pre style="font-family: var(--font-mono); background: var(--bg-subtle); padding: 0.75rem 1rem; border-radius: 8px;"><code>age = 18\nif age >= 18:\n    print("You are an adult.")</code></pre>
 
-      <h3>Conversion Isn't Magic!</h3>
-      <p>
-        What happens if you try <code>int("hello")</code>?
-      </p>
-      <pre style="font-family: var(--font-mono); background: #FEF2F2; color: #991B1B; padding: 0.75rem 1rem; border-radius: 8px;"><code>ValueError: invalid literal for int() with base 10: 'hello'</code></pre>
-      <p>
-        Python cannot magically turn arbitrary text words into numbers! Typecasting requires valid literal representations.
+      <h3>2. <code>if-else</code> Statement</h3>
+      <pre style="font-family: var(--font-mono); background: var(--bg-subtle); padding: 0.75rem 1rem; border-radius: 8px;"><code>age = 17\nif age >= 18:\n    print("You are an adult.")\nelse:\n    print("You are a minor.")</code></pre>
+
+      <p style="margin-top: 1rem;">
+        <strong>Remember</strong>: Always place a colon <code>:</code> at the end of decision lines, and indent the statements underneath by 4 spaces!
       </p>
     `,
     interactiveCode: {
-      initialCode: `# Satyam Sir's Input & Typecast Pattern\nage_str = "20"  # Simulating user input()\n\n# Convert text string to integer number:\nage_num = int(age_str)\n\nfuture_age = age_num + 5\nprint(f"In 5 years, you will be: {future_age}")\n\n# Combining input() and int() in one line:\nscore = int("100") + 50\nprint(f"Updated score: {score}")`,
-      expectedOutput: `In 5 years, you will be: 25\nUpdated score: 150`,
-      brokenCode: `text = "hello"\nnumber = int(text)`,
-      brokenExplanation: `<strong>ValueError: invalid literal for int()</strong><br>Typecasting is not magic! Python cannot turn word text 'hello' into a whole integer number.`
+      initialCode: `# Flow Control Demo\nage = 17\n\nif age >= 18:\n    print("You are an adult.")\nelse:\n    print("You are a minor.")`,
+      expectedOutput: `You are a minor.`
     },
     predictionQuestion: {
-      question: "What will int('25') + int('5') output?",
+      question: "If age = 20, which print statement will execute?",
       options: [
-        "255",
-        "30",
-        "TypeError"
+        "You are an adult.",
+        "You are a minor.",
+        "Neither"
       ],
-      correctIndex: 1,
-      explanation: "Both string texts are converted into real integer numbers (25 + 5), resulting in 30!"
+      correctIndex: 0,
+      explanation: "20 >= 18 is True, so Python executes the if block and prints 'You are an adult.'!"
     },
     challenge: {
-      prompt: "Convert the string variable val = '45' to an integer using int() and print val + 5.",
-      targetKeyword: "int"
-    },
-    dontMemorize: {
-      title: "DON'T MEMORIZE: Obscure base conversions in int()",
-      content: "Satyam Sir's Rule: Master <code>int(x)</code>, <code>str(x)</code>, <code>float(x)</code>, and <code>bool(x)</code>."
-    }
-  },
-
-  // --------------------------------------------------------------------------
-  // CHAPTER 05: Thinking Like a Programmer (Conditions & Logic)
-  // --------------------------------------------------------------------------
-  {
-    id: 5,
-    number: "Chapter 05",
-    title: "Thinking Like a Programmer: Decisions (if / else)",
-    subtitle: "Moving from syntax transcription to real-world problem decomposition.",
-    readTime: "9 min read",
-    category: "logic",
-    depthTag: "Concept Depth: 9/10 (Programming Thinking)",
-    story: `
-      <p class="lead-text">
-        Satyam Sir walked up to the whiteboard and wrote a real-world problem:
-      </p>
-      <p>
-        <em>"A school wants to evaluate student exam marks. If the student scores 40 or higher, print 'Passed'. Otherwise, print 'Failed'."</em>
-      </p>
-    `,
-    comicPanels: [
-      {
-        speaker: "sr",
-        name: "Satyam Sir",
-        text: "Don't jump straight into typing code! First, break the problem into human thinking steps: 1. Get marks. 2. Compare marks >= 40. 3. Make a choice!"
-      },
-      {
-        speaker: "riya",
-        name: "Riya",
-        text: "So the logic pipeline is: Input ➔ Decision Check ➔ Action A or Action B!"
-      },
-      {
-        speaker: "byte",
-        name: "Byte",
-        text: "And Python represents that decision check using 'if condition:' followed by 4 indented spaces!"
-      }
-    ],
-    explanation: `
-      <h3>Problem Decomposition Pipeline</h3>
-      <div style="background: var(--bg-paper); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.8;">
-        Real Problem ➔ Human Logic Pipeline ➔ Pseudocode Steps ➔ Python if/else Syntax
-      </div>
-
-      <h3 style="margin-top: 1.5rem;">Python Decision Syntax</h3>
-      <pre style="font-family: var(--font-mono); background: var(--bg-subtle); padding: 0.75rem 1rem; border-radius: 8px;"><code>marks = 65\n\nif marks >= 40:\n    print("Passed")\nelse:\n    print("Failed")</code></pre>
-      
-      <p>
-        Notice the <strong>colon <code>:</code></strong> at the end of the <code>if</code> and <code>else</code> lines, followed by <strong>4 indented spaces</strong>. Indentation defines which code blocks belong to which decision outcome!
-      </p>
-    `,
-    interactiveCode: {
-      initialCode: `marks = 65\n\nif marks >= 40:\n    print("Result: Student Passed! 🎉")\nelse:\n    print("Result: Student Failed. Need retake.")\n\n# Multiple decisions with elif:\nscore = 85\nif score >= 90:\n    print("Grade: A")\nelif score >= 80:\n    print("Grade: B")\nelse:\n    print("Grade: C")`,
-      expectedOutput: `Result: Student Passed! 🎉\nGrade: B`
-    },
-    predictionQuestion: {
-      question: "If marks = 35, what will print in the if/else block above?",
-      options: [
-        "Result: Student Passed! 🎉",
-        "Result: Student Failed. Need retake.",
-        "Nothing will print"
-      ],
-      correctIndex: 1,
-      explanation: "35 >= 40 is False, so Python skips the if block and executes the indented else block!"
-    },
-    challenge: {
-      prompt: "Write an if/else statement checking if age >= 18. If true, print 'Adult', else print 'Minor'.",
+      prompt: "Write an if-else statement checking if score >= 50. Print 'Pass' if true, else 'Fail'.",
       targetKeyword: "if"
     },
     dontMemorize: {
-      title: "DON'T MEMORIZE: Rigid syntax templates",
-      content: "Satyam Sir's Rule: Focus on the human decision pipeline first: Understand ➔ Decompose ➔ Logic ➔ Code!"
+      title: "DON'T MEMORIZE: Deep nested branching yet",
+      content: "Satyam Sir's Rule: Master clean single-level if-else blocks before nesting!"
     }
   }
 ];

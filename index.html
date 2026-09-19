@@ -44,7 +44,7 @@
           <span class="tab-num">02</span> Chapters
         </button>
         <button class="nav-tab" data-world="think">
-          <span class="tab-num">03</span> Think
+          <span class="tab-num">03</span> Clean Code Path
         </button>
         <button class="nav-tab" data-world="future">
           <span class="tab-num">04</span> Future
@@ -80,7 +80,7 @@
         <div class="mobile-nav-tabs">
           <button class="mobile-nav-tab active" data-world="learn">01. Story Reader</button>
           <button class="mobile-nav-tab" data-world="chapters">02. All Chapters</button>
-          <button class="mobile-nav-tab" data-world="think">03. How Programmers Think</button>
+          <button class="mobile-nav-tab" data-world="think">03. Clean Code Learning Path</button>
           <button class="mobile-nav-tab" data-world="future">04. The Future of Coding</button>
         </div>
       </div>
@@ -151,23 +151,39 @@
       </div>
     </section>
 
-    <!-- ==================== WORLD 3: THINK (Interactive Mental Models) ==================== -->
+    <!-- ==================== WORLD 3: THINK (Python Clean Code Learning Path) ==================== -->
     <section id="world-think" class="world-view hidden-view">
       <div class="world-hero">
-        <span class="world-tag">PILLAR 03 — MENTAL MODELS</span>
-        <h2>How Programmers Think</h2>
-        <p class="world-desc">Satyam Sir's core mental models for problem-solving, clean code, and engineering mindset.</p>
+        <span class="world-tag">PILLAR 03 — SATYAM SIR'S CURRICULUM</span>
+        <h2>Python Clean Code Learning Path</h2>
+        <p class="world-desc">Don't just write code that works. Write code that looks natural, expressive, and Pythonic.</p>
       </div>
 
-      <!-- Interactive Clean Code Toggle Showcase -->
+      <!-- Teaching Pattern Banner -->
+      <div class="think-showcase-container">
+        <div class="showcase-card" style="background: linear-gradient(135deg, #EFF6FF 0%, #FAF8F5 100%); border-color: #BFDBFE;">
+          <span class="card-num" style="color: var(--accent-blue);">SATYAM SIR'S TEACHING FORMULA</span>
+          <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">The Clean Code Method</h3>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700;">
+            <span style="background: white; padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #DBEAFE;">1. Concept</span> ➔ 
+            <span style="background: #FEF2F2; color: #991B1B; padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #FCA5A5;">2. Bad Code</span> ➔ 
+            <span style="background: #FFFBEB; color: #92400E; padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #FDE68A;">3. Why It's Bad</span> ➔ 
+            <span style="background: #ECFDF5; color: #065F46; padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #A7F3D0;">4. Clean Code</span> ➔ 
+            <span style="background: white; padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #DBEAFE;">5. Why Better</span> ➔ 
+            <span style="background: #EFF6FF; color: #1E40AF; padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #BFDBFE;">6. Real Practice</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Refactoring Transformer Showcase -->
       <div class="think-showcase-container">
         <div class="showcase-card">
           <div class="showcase-header">
             <div>
-              <span class="card-num">INTERACTIVE SHOWCASE</span>
-              <h3>Clean Code vs. Messy Code</h3>
+              <span class="card-num">INTERACTIVE REFACTORING DEMO</span>
+              <h3>Single Responsibility Principle (SRP)</h3>
             </div>
-            <button class="btn btn-secondary" id="toggle-clean-code-btn">Toggle Code Style (Clean / Messy)</button>
+            <button class="btn btn-secondary" id="toggle-clean-code-btn">Toggle Style (Messy vs. Clean SRP)</button>
           </div>
           <div class="code-preview-box" id="clean-code-preview-box">
             <!-- Injected via JS -->
@@ -175,7 +191,27 @@
         </div>
       </div>
 
-      <!-- Mental Model Grid -->
+      <!-- Level Filter Pills -->
+      <div class="think-showcase-container">
+        <div class="category-pills" id="level-pills">
+          <button class="pill active" data-level="top20">⭐ Top 20 Essential List</button>
+          <button class="pill" data-level="table">📊 40-Topic Master Priority Table</button>
+          <button class="pill" data-level="l1">Level 1: Understandable Python</button>
+          <button class="pill" data-level="l2">Level 2: Pythonic Thinking</button>
+          <button class="pill" data-level="l3">Level 3: Functions Done Right</button>
+          <button class="pill" data-level="l4">Level 4: Error Handling</button>
+          <button class="pill" data-level="l5">Level 5: OOP Clean Code</button>
+          <button class="pill" data-level="l6">Level 6: Project Structure</button>
+          <button class="pill" data-level="l7">Level 7: Type Hints</button>
+          <button class="pill" data-level="l8">Level 8: Testing</button>
+          <button class="pill" data-level="l9">Level 9: Refactoring</button>
+          <button class="pill" data-level="l10">Level 10: Code Smells</button>
+          <button class="pill" data-level="l11">Level 11: Core Principles (KISS, DRY, YAGNI)</button>
+          <button class="pill" data-level="l12">Level 12: Advanced Python</button>
+        </div>
+      </div>
+
+      <!-- Clean Code Levels Grid -->
       <div class="think-grid" id="think-cards-container">
         <!-- Populated dynamically via JS -->
       </div>

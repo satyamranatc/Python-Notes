@@ -1,0 +1,213 @@
+/* ==========================================================================
+   FUTURE OF CODING ESSAY STYLES — 04. FUTURE (FUTURE.CSS)
+   ========================================================================== */
+
+.future-essay-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem 1.5rem;
+}
+
+.essay-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.essay-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  margin: 0.75rem 0;
+  color: var(--text-primary);
+}
+
+.essay-meta {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.essay-body {
+  font-size: 1.12rem;
+  line-height: 1.8;
+  color: #1F2937;
+}
+
+.essay-body h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 3rem 0 1.25rem 0;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--accent-amber-light);
+  padding-bottom: 0.4rem;
+  display: inline-block;
+}
+
+.essay-body h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 2.25rem 0 1rem 0;
+  color: var(--text-primary);
+}
+
+.essay-body p {
+  margin-bottom: 1.5rem;
+}
+
+.essay-body blockquote {
+  border-left: 4px solid var(--accent-purple);
+  background-color: #F3E8FF;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #581C87;
+}
+
+.lead-text {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+/* Timeline */
+.timeline-wrapper {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.timeline-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--accent-purple);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+}
+
+.timeline-node {
+  background-color: var(--bg-paper);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  position: relative;
+}
+
+.timeline-node.highlight-node {
+  background: linear-gradient(135deg, #F3E8FF 0%, #FFFFFF 100%);
+  border-color: #C084FC;
+}
+
+.node-year {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--accent-purple);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-node h4 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-node p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+/* Career Path Cards */
+.career-paths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.career-path-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.career-path-card h4 {
+  font-size: 1.1rem;
+  color: var(--accent-blue);
+  margin-bottom: 0.5rem;
+}
+
+.career-path-card p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* Flowchart comparison boxes */
+.flowchart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.flowchart-box {
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.flowchart-box.healthy-box {
+  background-color: #ECFDF5;
+  border: 1px solid #A7F3D0;
+}
+
+.flowchart-box.unhealthy-box {
+  background-color: #FEF2F2;
+  border: 1px solid #FCA5A5;
+}
+
+/* Roadmap Grid */
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.roadmap-step-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  border-top: 4px solid var(--accent-amber);
+}
+
+.roadmap-step-card h4 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
