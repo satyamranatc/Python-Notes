@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PYTHON, BUT DIFFERENT — Taught by Satyam Rana (SR)</title>
-  <meta name="description" content="An interactive, comic-style, story-driven learning experience created by Satyam Rana (SR) to master Python from absolute zero.">
+  <title>PYTHON, BUT DIFFERENT — Taught by Satyam Sir</title>
+  <meta name="description" content="An interactive, comic-style, story-driven learning experience created by Satyam Sir to master Python from absolute zero.">
   
   <!-- Google Fonts: Fraunces (Editorial Display), Plus Jakarta Sans (Clean Body), JetBrains Mono (Code) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
 
   <!-- Top Announcement Bar -->
   <div class="top-banner" id="announcement-banner">
-    <span>✨ <em>Story Update:</em> Join <strong>Satyam Rana (SR)</strong> &amp; Riya in Chapter 00 to Chapter 03!</span>
+    <span>✨ <em>Story Update:</em> Join <strong>Satyam Sir</strong> &amp; Riya in Chapter 00 to Chapter 04!</span>
     <button class="banner-close" id="close-banner-btn" aria-label="Close banner">&times;</button>
   </div>
 
@@ -32,7 +32,7 @@
           <span class="logo-main">PYTHON</span>
           <span class="logo-sub">BUT DIFFERENT</span>
         </a>
-        <span class="brand-tag">Taught by Satyam Rana (SR)</span>
+        <span class="brand-tag">Taught by Satyam Sir</span>
       </div>
 
       <!-- Navigation Worlds (Desktop & Tablet) -->
@@ -95,13 +95,13 @@
       
       <!-- Editorial Hero Banner -->
       <div class="hero-section">
-        <div class="hero-badge">STORY-DRIVEN PYTHON &bull; BY SATYAM RANA (SR)</div>
+        <div class="hero-badge">STORY-DRIVEN PYTHON &bull; BY SATYAM SIR</div>
         <h1 class="hero-title">Learn to think like a programmer. <br><span class="serif-italic">Not through textbooks.</span></h1>
         <p class="hero-subtitle">
-          Join <strong>Riya</strong>, <strong>Byte</strong>, and your teacher <strong>Satyam Rana (SR)</strong> on a story-driven journey from absolute zero to mastering code.
+          Join <strong>Riya</strong>, <strong>Byte</strong>, and your teacher <strong>Satyam Sir</strong> on a story-driven journey from absolute zero to mastering code.
         </p>
         <div class="hero-actions">
-          <button class="btn btn-primary" id="hero-start-btn">Start Chapter 00: Absolute Zero →</button>
+          <button class="btn btn-primary" id="hero-start-btn">Start Chapter 00: Before We Learn Python →</button>
           <button class="btn btn-secondary" id="hero-chapters-btn">Browse All Chapters</button>
         </div>
       </div>
@@ -113,7 +113,7 @@
         <aside class="chapter-sidebar" id="chapter-sidebar">
           <div class="sidebar-header">
             <h3>Chapter Index</h3>
-            <span class="sidebar-subtitle">Curriculum by Satyam Rana (SR)</span>
+            <span class="sidebar-subtitle">Curriculum by Satyam Sir</span>
           </div>
           <ul class="chapter-list" id="sidebar-chapter-list">
             <!-- Dynamic Sidebar List -->
@@ -133,7 +133,7 @@
       <div class="world-hero">
         <span class="world-tag">FULL CURRICULUM</span>
         <h2>The Chapter Universe</h2>
-        <p class="world-desc">Explore the entire story chapter by chapter. Designed and taught by Satyam Rana (SR).</p>
+        <p class="world-desc">Explore the entire story chapter by chapter. Designed and taught by Satyam Sir.</p>
         
         <!-- Filter Controls -->
         <div class="chapters-filter-bar">
@@ -151,33 +151,83 @@
       </div>
     </section>
 
-    <!-- ==================== WORLD 3: THINK ==================== -->
+    <!-- ==================== WORLD 3: THINK (Interactive Mental Models) ==================== -->
     <section id="world-think" class="world-view hidden-view">
       <div class="world-hero">
         <span class="world-tag">PILLAR 03 — MENTAL MODELS</span>
         <h2>How Programmers Think</h2>
-        <p class="world-desc">Satyam Rana's core principles of problem-solving, abstraction, and debugging.</p>
+        <p class="world-desc">Satyam Sir's core mental models for problem-solving, clean code, and engineering mindset.</p>
       </div>
+
+      <!-- Interactive Clean Code Toggle Showcase -->
+      <div class="think-showcase-container">
+        <div class="showcase-card">
+          <div class="showcase-header">
+            <div>
+              <span class="card-num">INTERACTIVE SHOWCASE</span>
+              <h3>Clean Code vs. Messy Code</h3>
+            </div>
+            <button class="btn btn-secondary" id="toggle-clean-code-btn">Toggle Code Style (Clean / Messy)</button>
+          </div>
+          <div class="code-preview-box" id="clean-code-preview-box">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Mental Model Grid -->
       <div class="think-grid" id="think-cards-container">
         <!-- Populated dynamically via JS -->
       </div>
     </section>
 
-    <!-- ==================== WORLD 4: FUTURE ==================== -->
+    <!-- ==================== WORLD 4: FUTURE (Editorial Manifesto & Timeline) ==================== -->
     <section id="world-future" class="world-view hidden-view">
       <div class="future-essay-container">
+        
+        <!-- Hero Manifesto Header -->
         <div class="essay-header">
-          <span class="world-tag">PILLAR 04 — PHILOSOPHY</span>
-          <h1 class="essay-title">What Happens When Computers Write Code?</h1>
+          <span class="world-tag">PILLAR 04 — PHILOSOPHY &amp; FUTURE</span>
+          <h1 class="essay-title">What Happens When AI Writes the Code?</h1>
           <div class="essay-meta">
-            <span>By Satyam Rana (SR)</span> &bull; <span>5 min read</span> &bull; <span>Forward Thinking</span>
+            <span>By Satyam Sir</span> &bull; <span>5 min read</span> &bull; <span>The Future of Software</span>
           </div>
         </div>
+
         <div class="essay-body">
           <p class="lead-text">
-            In 1990, programmers wrote every byte by hand. In 2010, libraries did 80% of the heavy lifting. Today in 2026, AI generates entire modules in seconds.
+            In 1990, programmers wrote every byte of assembly by hand. In 2010, open-source libraries did 80% of the work. Today, AI models generate entire modules in seconds.
           </p>
+
+          <!-- Interactive Timeline -->
+          <div class="timeline-wrapper">
+            <h3 class="timeline-title">The Evolution of Software Engineering</h3>
+            <div class="timeline-grid">
+              <div class="timeline-node">
+                <span class="node-year">1990</span>
+                <h4>Manual Bytes</h4>
+                <p>Writing raw memory pointers and assembly instructions line by line.</p>
+              </div>
+              <div class="timeline-node">
+                <span class="node-year">2010</span>
+                <h4>Framework Era</h4>
+                <p>Reusing open-source packages and high-level language abstractions.</p>
+              </div>
+              <div class="timeline-node">
+                <span class="node-year">2026</span>
+                <h4>AI Pair Coding</h4>
+                <p>LLM assistants generating boilerplate and suggesting real-time edits.</p>
+              </div>
+              <div class="timeline-node highlight-node">
+                <span class="node-year">FUTURE</span>
+                <h4>The Architect Era</h4>
+                <p>Humans specifying problem intent, system design, and human empathy.</p>
+              </div>
+            </div>
+          </div>
+
           <hr class="divider">
+
           <h3>Does coding disappear?</h3>
           <p>
             No. But the definition of coding shifts from <em>syntax transcription</em> to <em>intent specification and architectural judgement</em>.
@@ -185,15 +235,33 @@
           <p>
             When syntax becomes effortless, understanding <strong>problems, data flow, edge cases, and human intent</strong> becomes the ultimate superpower.
           </p>
+
           <blockquote class="editorial-quote">
-            "The computer doesn't care how hard you worked on the code. It only cares whether the logic reflects reality." — Satyam Rana
+            "The computer doesn't care how hard you worked on the code. It only cares whether your logic reflects reality." — Satyam Sir
           </blockquote>
+
           <h3>What remains uniquely human?</h3>
-          <ul>
-            <li><strong>Empathy</strong>: Designing for human feelings and workflow friction.</li>
-            <li><strong>Taste</strong>: Knowing what to omit and keeping solutions simple.</li>
-            <li><strong>Debugging Reality</strong>: Asking <em>"Is this even the right problem to solve?"</em></li>
-          </ul>
+          
+          <div class="superpower-grid">
+            <div class="superpower-card">
+              <div class="sp-icon">🧠</div>
+              <h4>Architectural Intent</h4>
+              <p>Deciding <em>what</em> problem is worth solving before instructing an AI or computer how to code it.</p>
+            </div>
+
+            <div class="superpower-card">
+              <div class="sp-icon">💡</div>
+              <h4>Taste &amp; Minimalism</h4>
+              <p>Refusing bloated code. Knowing what features to omit to keep systems elegant and fast.</p>
+            </div>
+
+            <div class="superpower-card">
+              <div class="sp-icon">❤️</div>
+              <h4>Empathy &amp; UX</h4>
+              <p>Understanding real human feelings, workflow friction, and creating software that delights people.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -227,7 +295,7 @@
     <div class="footer-container">
       <div class="footer-brand">
         <span class="footer-title">PYTHON, BUT DIFFERENT</span>
-        <p>Created &amp; taught by Satyam Rana (SR) — A story-driven living learning world.</p>
+        <p>Created &amp; taught by Satyam Sir — A story-driven living learning world.</p>
       </div>
       <div class="footer-links">
         <button class="footer-link-btn" id="footer-reset-btn">Reset Story Progress</button>

@@ -1,6 +1,6 @@
 /* ==========================================================================
    PYTHON, BUT DIFFERENT — Application Controller & State Management
-   Characters: Riya (R), Byte (B), Satyam Rana / SR (Teacher & Architect)
+   Characters: Riya (R), Byte (B), Satyam Sir / SR (Teacher & Architect)
    ========================================================================== */
 
 import { chaptersData } from './chapters.js';
@@ -9,10 +9,11 @@ import { dictionaryData } from './dictionary.js';
 // Application State
 const state = {
   currentWorld: 'learn',
-  currentChapterId: 0, // Starts at Chapter 00
+  currentChapterId: 0,
   chapterFilterCategory: 'all',
   chapterSearchQuery: '',
   dictionarySearchQuery: '',
+  isCleanCodeStyle: true,
   visualizerState: {
     varName: 'player_name',
     varVal: '"Riya"',
@@ -36,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
   bindBannerEvents();
 });
 
-// Navigation between Worlds (Desktop & Mobile)
 function initNavigation() {
   const navTabs = document.querySelectorAll('.nav-tab, .mobile-nav-tab');
   navTabs.forEach(tab => {
@@ -47,7 +47,6 @@ function initNavigation() {
     });
   });
 
-  // Hero Actions
   const heroStartBtn = document.getElementById('hero-start-btn');
   if (heroStartBtn) {
     heroStartBtn.addEventListener('click', () => {
@@ -75,17 +74,14 @@ function initNavigation() {
 function switchWorld(worldName) {
   state.currentWorld = worldName;
   
-  // Update desktop tabs
   document.querySelectorAll('.nav-tab').forEach(t => {
     t.classList.toggle('active', t.dataset.world === worldName);
   });
 
-  // Update mobile tabs
   document.querySelectorAll('.mobile-nav-tab').forEach(t => {
     t.classList.toggle('active', t.dataset.world === worldName);
   });
 
-  // Toggle World Visibility
   document.querySelectorAll('.world-view').forEach(view => {
     view.classList.remove('active-view');
   });
@@ -102,7 +98,6 @@ function switchWorld(worldName) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Mobile Drawer Controls
 function initMobileDrawer() {
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const drawer = document.getElementById('mobile-nav-drawer');
@@ -122,7 +117,7 @@ function closeMobileDrawer() {
 }
 
 // ==========================================================================
-// 2. Sidebar & Story Reader Rendering
+// 2. Sidebar & Reader Rendering
 // ==========================================================================
 function renderSidebarChapters() {
   const sidebarList = document.getElementById('sidebar-chapter-list');
@@ -151,7 +146,6 @@ function renderChapter(chapterId) {
   const ch = chaptersData.find(c => c.id === chapterId);
   if (!ch) return;
 
-  // Update sidebar active status
   document.querySelectorAll('.chapter-item-btn').forEach(btn => {
     btn.classList.toggle('active', parseInt(btn.dataset.id, 10) === chapterId);
   });
@@ -159,7 +153,6 @@ function renderChapter(chapterId) {
   const article = document.getElementById('chapter-article');
   if (!article) return;
 
-  // Build Comic Panels HTML (Riya = R, Byte = B, Satyam Rana = SR)
   const comicHtml = ch.comicPanels ? `
     <div class="comic-panel-container">
       ${ch.comicPanels.map(panel => `
@@ -176,10 +169,23 @@ function renderChapter(chapterId) {
     </div>
   ` : '';
 
-  // Visualizer Widget HTML if specified
   const visualizerHtml = ch.visualizerType ? getVisualizerHtml(ch.visualizerType) : '';
 
-  // Playground HTML
+  // Predict First Multiple Choice Quiz
+  const predictionHtml = ch.predictionQuestion ? `
+    <div class="prediction-box">
+      <div class="prediction-title">🔮 PREDICT BEFORE RUNNING: Test Your Intuition</div>
+      <p style="font-weight: 600; margin-bottom: 0.75rem;">${ch.predictionQuestion.question}</p>
+      <div class="prediction-options">
+        ${ch.predictionQuestion.options.map((opt, idx) => `
+          <button class="pred-opt-btn" data-idx="${idx}">${opt}</button>
+        `).join('')}
+      </div>
+      <div class="prediction-feedback hidden" id="pred-feedback"></div>
+    </div>
+  ` : '';
+
+  // Code Playground HTML
   const playgroundHtml = ch.interactiveCode ? `
     <div class="code-playground">
       <div class="playground-bar">
@@ -190,7 +196,7 @@ function renderChapter(chapterId) {
         </div>
       </div>
       <div class="playground-editor-area">
-        <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8</div>
+        <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10</div>
         <textarea id="pg-code-textarea" class="code-textarea" spellcheck="false">${ch.interactiveCode.initialCode}</textarea>
       </div>
       <div class="playground-console">
@@ -200,7 +206,15 @@ function renderChapter(chapterId) {
     </div>
   ` : '';
 
-  // Cards HTML
+  // Mini Challenge Prompt
+  const challengeHtml = ch.challenge ? `
+    <div class="challenge-box">
+      <div class="challenge-title">🎯 MINI PRACTICE CHALLENGE</div>
+      <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem;">${ch.challenge.prompt}</p>
+      <p style="font-size: 0.85rem; color: var(--text-secondary);">Type your solution in the code editor above and hit <strong>▶ Run Code</strong>!</p>
+    </div>
+  ` : '';
+
   const dontMemorizeHtml = ch.dontMemorize ? `
     <div class="concept-card card-dont-memorize">
       <h4>📌 ${ch.dontMemorize.title}</h4>
@@ -217,10 +231,12 @@ function renderChapter(chapterId) {
     </details>
   ` : '';
 
-  // Render Full Article
   article.innerHTML = `
     <div class="chapter-header">
-      <span class="chapter-number-tag">${ch.number} &bull; ${ch.readTime}</span>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem;">
+        <span class="chapter-number-tag">${ch.number} &bull; ${ch.readTime}</span>
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-blue); background: var(--accent-blue-light); padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700;">${ch.depthTag || ''}</span>
+      </div>
       <h1 class="chapter-main-title">${ch.title}</h1>
       <p class="chapter-lead">${ch.subtitle}</p>
     </div>
@@ -233,18 +249,45 @@ function renderChapter(chapterId) {
 
     ${visualizerHtml}
 
+    ${predictionHtml}
+
     ${playgroundHtml}
+
+    ${challengeHtml}
 
     ${dontMemorizeHtml}
 
     ${underHoodHtml}
 
-    <!-- Chapter Footer Navigation -->
     <div style="display: flex; justify-content: space-between; margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
       ${chapterId > 0 ? `<button class="btn btn-secondary" id="ch-prev-btn">← Previous Chapter</button>` : '<div></div>'}
       ${chapterId < chaptersData.length - 1 ? `<button class="btn btn-primary" id="ch-next-btn">Next Chapter →</button>` : '<div></div>'}
     </div>
   `;
+
+  // Attach Prediction Quiz Events
+  if (ch.predictionQuestion) {
+    const predBtns = article.querySelectorAll('.pred-opt-btn');
+    const predFeedback = document.getElementById('pred-feedback');
+    predBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const selectedIdx = parseInt(btn.dataset.idx, 10);
+        const correct = selectedIdx === ch.predictionQuestion.correctIndex;
+
+        predBtns.forEach(b => b.classList.remove('selected-correct', 'selected-wrong'));
+        if (correct) {
+          btn.classList.add('selected-correct');
+          predFeedback.className = "prediction-feedback pred-success";
+          predFeedback.innerHTML = `✅ <strong>Correct!</strong> ${ch.predictionQuestion.explanation}`;
+        } else {
+          btn.classList.add('selected-wrong');
+          predFeedback.className = "prediction-feedback pred-error";
+          predFeedback.innerHTML = `❌ <strong>Not quite!</strong> ${ch.predictionQuestion.explanation}`;
+        }
+        predFeedback.classList.remove('hidden');
+      });
+    });
+  }
 
   // Attach Code Execution Events
   if (ch.interactiveCode) {
@@ -268,12 +311,10 @@ function renderChapter(chapterId) {
     }
   }
 
-  // Attach Visualizer Listeners
   if (ch.visualizerType) {
     bindVisualizerEvents(ch.visualizerType);
   }
 
-  // Attach Previous/Next Navigation
   const prevBtn = document.getElementById('ch-prev-btn');
   if (prevBtn) {
     prevBtn.addEventListener('click', () => {
@@ -289,7 +330,6 @@ function renderChapter(chapterId) {
     });
   }
 
-  // Bind Term Highlight Links
   document.querySelectorAll('.term-link').forEach(link => {
     link.addEventListener('click', () => {
       const termId = link.dataset.id;
@@ -299,7 +339,7 @@ function renderChapter(chapterId) {
 }
 
 // ==========================================================================
-// 3. World 2: All Chapters Directory Engine
+// 3. World 2: All Chapters Directory
 // ==========================================================================
 function initChaptersDirectory() {
   const searchInput = document.getElementById('chapters-search-input');
@@ -407,7 +447,7 @@ function bindVisualizerEvents(type) {
 }
 
 // ==========================================================================
-// 5. Simulated Python Engine
+// 5. Enhanced Simulated Python Engine
 // ==========================================================================
 function executePythonSimulated(code, outputElement) {
   outputElement.classList.remove('error-output');
@@ -416,41 +456,35 @@ function executePythonSimulated(code, outputElement) {
   setTimeout(() => {
     try {
       const lines = code.split('\n').map(l => l.trim()).filter(l => l.length > 0 && !l.startsWith('#'));
-      let logs = [];
+      let rawBuffer = "";
       let vars = {};
 
       for (let line of lines) {
-        // Variable Assignment
-        if (line.includes('=') && !line.startsWith('if') && !line.includes('==') && !line.includes('>')) {
+        if (line.includes('=') && !line.startsWith('if') && !line.includes('==') && !line.includes('>') && !line.startsWith('print(')) {
           const parts = line.split('=');
           const varName = parts[0].trim();
           let varVal = parts[1].trim();
 
-          // Strings
           if ((varVal.startsWith('"') && varVal.endsWith('"')) || (varVal.startsWith("'") && varVal.endsWith("'"))) {
             vars[varName] = varVal.slice(1, -1);
           }
-          // int()
           else if (varVal.startsWith('int(') && varVal.endsWith(')')) {
             const inside = varVal.substring(4, varVal.length - 1).trim();
             const innerVal = vars[inside] !== undefined ? vars[inside] : inside.replace(/['"]/g, '');
             vars[varName] = parseInt(innerVal, 10);
           }
-          // Math multiplication
           else if (varVal.includes('*')) {
             const mParts = varVal.split('*').map(p => p.trim());
             const v1 = vars[mParts[0]] !== undefined ? vars[mParts[0]] : Number(mParts[0]);
             const v2 = vars[mParts[1]] !== undefined ? vars[mParts[1]] : Number(mParts[1]);
             vars[varName] = v1 * v2;
           }
-          // Math addition
           else if (varVal.includes('+')) {
             const aParts = varVal.split('+').map(p => p.trim());
             const v1 = vars[aParts[0]] !== undefined ? vars[aParts[0]] : Number(aParts[0]);
             const v2 = vars[aParts[1]] !== undefined ? vars[aParts[1]] : Number(aParts[1]);
             vars[varName] = v1 + v2;
           }
-          // Numbers
           else if (!isNaN(Number(varVal))) {
             vars[varName] = Number(varVal);
           } else if (varVal === 'True') {
@@ -461,48 +495,73 @@ function executePythonSimulated(code, outputElement) {
           continue;
         }
 
-        // Print Statement
         if (line.startsWith('print(') && line.endsWith(')')) {
-          const inside = line.substring(6, line.length - 1).trim();
-          
+          let inside = line.substring(6, line.length - 1).trim();
+
+          let sepVal = ' ';
+          let endVal = '\n';
+
+          if (inside.includes('sep=')) {
+            const sepMatch = inside.match(/sep=['"](.*?)['"]/);
+            if (sepMatch) {
+              sepVal = sepMatch[1];
+              inside = inside.replace(/,\s*sep=['"].*?['"]/, '').replace(/sep=['"].*?['"]/, '');
+            }
+          }
+
+          if (inside.includes('end=')) {
+            const endMatch = inside.match(/end=['"](.*?)['"]/);
+            if (endMatch) {
+              endVal = endMatch[1].replace(/\\n/g, '\n');
+              inside = inside.replace(/,\s*end=['"].*?['"]/, '').replace(/end=['"].*?['"]/, '');
+            }
+          }
+
+          if (inside.startsWith('f"') || inside.startsWith("f'")) {
+            let fStr = inside.slice(2, -1);
+            fStr = fStr.replace(/\{([^}]+)\}/g, (_, key) => {
+              const trimmedKey = key.trim();
+              return vars[trimmedKey] !== undefined ? vars[trimmedKey] : trimmedKey;
+            });
+            rawBuffer += fStr + endVal;
+            continue;
+          }
+
           if (inside.includes('>')) {
-            const compParts = inside.split('>').map(p => p.trim());
-            const val1 = vars[compParts[0]] !== undefined ? vars[compParts[0]] : Number(compParts[0]);
-            const val2 = vars[compParts[1]] !== undefined ? vars[compParts[1]] : Number(compParts[1]);
-            logs.push((val1 > val2) ? 'True' : 'False');
+            const items = inside.split(',').map(i => i.trim());
+            const evaluatedItems = items.map(item => {
+              if (item.includes('>')) {
+                const parts = item.split('>').map(p => p.trim());
+                const v1 = vars[parts[0]] !== undefined ? vars[parts[0]] : Number(parts[0]);
+                const v2 = vars[parts[1]] !== undefined ? vars[parts[1]] : Number(parts[1]);
+                return (v1 > v2) ? 'True' : 'False';
+              }
+              if ((item.startsWith('"') && item.endsWith('"')) || (item.startsWith("'") && item.endsWith("'"))) {
+                return item.slice(1, -1);
+              }
+              return vars[item] !== undefined ? vars[item] : item;
+            });
+            rawBuffer += evaluatedItems.join(sepVal) + endVal;
             continue;
           }
 
-          if (inside.includes('+')) {
-            const concatParts = inside.split('+').map(p => p.trim());
-            let resultStr = concatParts.map(part => {
-              if ((part.startsWith('"') && part.endsWith('"')) || (part.startsWith("'") && part.endsWith("'"))) {
-                return part.slice(1, -1);
-              }
-              if (part.startsWith('str(') && part.endsWith(')')) {
-                const inner = part.substring(4, part.length - 1).trim();
-                return vars[inner] !== undefined ? String(vars[inner]) : inner;
-              }
-              return vars[part] !== undefined ? String(vars[part]) : part;
-            }).join('');
-            logs.push(resultStr);
-            continue;
-          }
+          const items = inside.split(',').map(i => i.trim()).filter(i => i.length > 0);
+          let printedItems = items.map(item => {
+            if ((item.startsWith('"') && item.endsWith('"')) || (item.startsWith("'") && item.endsWith("'"))) {
+              return item.slice(1, -1);
+            }
+            if (vars[item] !== undefined) {
+              return vars[item];
+            }
+            return item;
+          });
 
-          if ((inside.startsWith('"') && inside.endsWith('"')) || (inside.startsWith("'") && inside.endsWith("'"))) {
-            logs.push(inside.slice(1, -1));
-          } else if (vars[inside] !== undefined) {
-            logs.push(String(vars[inside]));
-          } else if (!isNaN(Number(inside))) {
-            logs.push(inside);
-          } else {
-            logs.push(inside);
-          }
+          rawBuffer += printedItems.join(sepVal) + endVal;
           continue;
         }
       }
 
-      outputElement.textContent = logs.length > 0 ? logs.join('\n') : "Executed cleanly (no print output).";
+      outputElement.textContent = rawBuffer.length > 0 ? rawBuffer : "Executed cleanly (no output).";
 
     } catch (err) {
       outputElement.classList.add('error-output');
@@ -635,9 +694,11 @@ function bindBannerEvents() {
 }
 
 // ==========================================================================
-// 7. World 3: Think Renderer
+// 7. World 3: Think Renderer & Clean Code Switcher
 // ==========================================================================
 function renderThinkWorld() {
+  renderCleanCodeShowcase();
+
   const container = document.getElementById('think-cards-container');
   if (!container) return;
 
@@ -645,7 +706,7 @@ function renderThinkWorld() {
     {
       num: "01. MENTAL MODEL",
       title: "Problem Decomposition",
-      desc: "Satyam Rana's First Rule: Never try to code an entire system at once. Break big intimidating problems into 3 tiny child problems until each fits on a single napkin."
+      desc: "Satyam Sir's First Rule: Never try to code an entire system at once. Break big intimidating problems into 3 tiny child problems until each fits on a single napkin."
     },
     {
       num: "02. MENTAL MODEL",
@@ -671,4 +732,32 @@ function renderThinkWorld() {
       <p style="color: var(--text-secondary); font-size: 0.95rem;">${t.desc}</p>
     </div>
   `).join('');
+}
+
+function renderCleanCodeShowcase() {
+  const box = document.getElementById('clean-code-preview-box');
+  const btn = document.getElementById('toggle-clean-code-btn');
+  if (!box) return;
+
+  const cleanSnippet = `# Satyam Sir's Standard: Clean, expressive Python
+base_coins = 50
+multiplier = 3
+
+total_coins = base_coins * multiplier
+print(f"Total coins collected: {total_coins}")`;
+
+  const messySnippet = `# Messy, hard-to-read code (Avoid!)
+c=50;m=3
+tc=c*m
+print("Coins:",tc)`;
+
+  box.innerHTML = `<pre><code>${state.isCleanCodeStyle ? cleanSnippet : messySnippet}</code></pre>`;
+
+  if (btn && !btn.dataset.bound) {
+    btn.dataset.bound = 'true';
+    btn.addEventListener('click', () => {
+      state.isCleanCodeStyle = !state.isCleanCodeStyle;
+      renderCleanCodeShowcase();
+    });
+  }
 }
